@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/sumoConfiguration.xsd">
+    <input>
+        <net-file value="iot.net.xml"/>
+        <route-files value="edited.rou.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+    </time>
+	<processing>
+     <step-method.ballistic value="true"/>
+    </processing>
+    <time-to-teleport value="-1"/>
+        <report>
+     <verbose value="true"/>
+     <no-step-log value="true"/>
+	
+	    <tripinfo-output value="7919Kilis.trips.xml"/>
+   </report>
+
+</configuration>
