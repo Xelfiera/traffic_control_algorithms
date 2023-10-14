@@ -55,7 +55,7 @@ def calc_edge_priority(lane_id, waiting_vehicles, waiting_time):
     lane_priority_status.input['no_waiting_vehicles'] = waiting_vehicles
     lane_priority_status.input['avg_waiting_time'] = waiting_time / waiting_vehicles
     lane_priority_status.compute()
-    priority_output = lane_priority_status.output['lane_priority']
+    priority_output = lane_priority_status.output['priority']
 
     print(f"Number of waiting vehicles in {lane_id}: {waiting_vehicles}")
     print(f"Average waiting time of vehicles in {lane_id}: {waiting_time / waiting_vehicles}")
