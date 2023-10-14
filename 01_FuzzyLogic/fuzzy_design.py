@@ -53,12 +53,19 @@ lane_priority_status = ctrl.ControlSystemSimulation(lane_priority_ctrl)
 
 def calc_edge_priority(lane_id, waiting_vehicles, waiting_time):
     lane_priority_status.input['no_waiting_vehicles'] = waiting_vehicles
-    lane_priority_status.input['avg_waiting_time'] = waiting_time / waiting_vehicles
+    if waiting_vehicles != 0:
+        lane_priority_status.input['avg_waiting_time'] = waiting_time / waiting_vehicles
+    else:
+        lane_priority_status.input['avg_waiting_time'] = 0
     lane_priority_status.compute()
     priority_output = lane_priority_status.output['priority']
 
+    print('\n')
     print(f"Number of waiting vehicles in {lane_id}: {waiting_vehicles}")
-    print(f"Average waiting time of vehicles in {lane_id}: {waiting_time / waiting_vehicles}")
+    if waiting_vehicles != 0:
+        print(f"Average waiting time of vehicles in {lane_id}: {waiting_time / waiting_vehicles}")
+    else:
+        print(f"Average waiting time of vehicles in {lane_id}: 0")
     print(f"Priority of {lane_id}: {priority_output}")
 
     return priority_output
