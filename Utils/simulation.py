@@ -8,6 +8,3 @@ def start():
         "sumo-gui", "-c", f"{sim_file}", '--start', '--quit-on-end',
         "--statistic-output", "stats\\statistics.stats.xml", "--tripinfo-output", "stats\\tripinfo.trips.xml"
     ])
-
-if __name__ == "__main__":
-    start()

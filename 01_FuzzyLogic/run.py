@@ -1,4 +1,6 @@
 import traci
+import skfuzzy as fuzzy
+from skfuzzy import control as ctrl
 from Utils import simulation
 
 def fuzzy_logic():
