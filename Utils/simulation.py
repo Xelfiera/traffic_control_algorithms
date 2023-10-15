@@ -29,6 +29,14 @@ def get_inc_edges():
             inc_edge_ids.append(edge)
     return inc_edge_ids
 
+def get_out_edges():
+    out_edge_ids = []
+    edge_ids = traci.edge.getIDList()
+    for edge in edge_ids:
+        if edge[2] == '1':
+            out_edge_ids.append(edge)
+    return out_edge_ids
+
 def set_green_phase(tl_id, edge_id):
     traci.trafficlight.setRedYellowGreenState(tl_id, tl_phases[edge_id])
 

@@ -5,15 +5,15 @@ from fuzzy_design import calc_edge_priority
 def fuzzy_logic():
     simulation.start()
     inc_edge_ids = simulation.get_inc_edges()
-    tl_light = traci.trafficlight.getIDList()[0]
+    tl_id = traci.trafficlight.getIDList()[0]
 
     while traci.simulation.getTime() < simulation.simulation_time:
         max_priority_edge = inc_edge_ids[get_max_priority_edge(inc_edge_ids)]
         if simulation.cur_phase_duration <= -3:
-            simulation.set_green_phase(tl_light, max_priority_edge)
+            simulation.set_green_phase(tl_id, max_priority_edge)
             simulation.cur_phase_duration = traci.edge.getLastStepHaltingNumber(max_priority_edge) * 3
         elif simulation.cur_phase_duration == 0:
-            simulation.set_yellow_phase(tl_light)
+            simulation.set_yellow_phase(tl_id)
         simulation.cur_phase_duration -= 1
         traci.simulationStep()
 
