@@ -18,7 +18,7 @@ def start():
     sim_file = fr"{sim_path}\kilis.sumocfg"
     traci.start([
         "sumo-gui", "-c", f"{sim_file}", '--start', '--quit-on-end',
-        "--statistic-output", "stats\\statistics.stats.xml", "--tripinfo-output", "stats\\tripinfo.trips.xml"
+        "--statistic-output", r"stats\statistics.stats.xml", "--tripinfo-output", r"stats\tripinfo.trips.xml"
     ])
 
 def get_inc_edges():
