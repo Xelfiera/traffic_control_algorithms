@@ -1,5 +1,4 @@
 import traci
-import time
 from Utils import simulation
 from fuzzy_design import calc_edge_priority
 
