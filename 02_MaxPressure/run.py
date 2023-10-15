@@ -9,7 +9,7 @@ def max_pressure():
 
     while traci.simulation.getTime() < simulation.simulation_time:
         pressures = calc_pressures(inc_edges, out_edges)
-        simulation.set_green_phase(tl_id, get_max_pressure_edge(pressures))
+        simulation.set_green_phase(tl_id, inc_edges[get_max_pressure_edge(pressures)])
 
         traci.simulationStep()
 
