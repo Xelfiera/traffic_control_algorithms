@@ -6,6 +6,12 @@ tl_phases = {"1_0": "rrrrrrrrrrrrrrrrrrGGGGGG",
              "2_0": "rrrrrrGGGGGGrrrrrrrrrrrr",
              "3_0": "rrrrrrrrrrrrGGGGGGrrrrrr",
              "4_0": "GGGGGGrrrrrrrrrrrrrrrrrr"}
+tl_yellow_phases = {"1_0": "rrrrrrrrrrrrrrrrrryyyyyy",
+                    "2_0": "rrrrrryyyyyyrrrrrrrrrrrr",
+                    "3_0": "rrrrrrrrrrrryyyyyyrrrrrr",
+                    "4_0": "yyyyyyrrrrrrrrrrrrrrrrrr"}
+
+cur_phase_duration = 0
 
 def start():
     sim_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Intersection")
@@ -23,5 +29,12 @@ def get_inc_edges():
             inc_edge_ids.append(edge)
     return inc_edge_ids
 
-def set_phase(tl_id, edge_id):
-    traci.trafficlight.setCompleteRedYellowGreenDefinition(tl_id, tl_phases[edge_id])
+def set_green_phase(tl_id, edge_id):
+    traci.trafficlight.setRedYellowGreenState(tl_id, tl_phases[edge_id])
+
+def set_yellow_phase(tl_id):
+    phase_definition = traci.trafficlight.getRedYellowGreenState(tl_id)
+    for edge_id in tl_phases.keys():
+        if tl_phases[edge_id] == phase_definition:
+            traci.trafficlight.setRedYellowGreenState(tl_id, tl_yellow_phases[edge_id])
+            break
