@@ -1,6 +1,7 @@
 import traci
 import os
 
+simulation_time = 7200
 tl_phases = {"1_0": "rrrrrrrrrrrrrrrrrrGGGGGG",
              "2_0": "rrrrrrGGGGGGrrrrrrrrrrrr",
              "3_0": "rrrrrrrrrrrrGGGGGGrrrrrr",

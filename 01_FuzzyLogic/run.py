@@ -9,11 +9,13 @@ def fuzzy_logic():
     tl_light = traci.trafficlight.getIDList()[0]
     edge_priorities = [0.0, 0.0, 0.0, 0.0]
 
-    while traci.simulation.getTime() < 7200:
+    while traci.simulation.getTime() < simulation.simulation_time:
         for i, edge_id in enumerate(inc_edge_ids):
             waiting_vehicles = len(traci.edge.getPendingVehicles(edge_id))
             waiting_time = traci.edge.getWaitingTime(edge_id)
             edge_priorities[i] = calc_edge_priority(edge_id, waiting_vehicles, waiting_time)
+
+        # processing...
 
         traci.simulationStep()
         time.sleep(1)
