@@ -46,3 +46,6 @@ def set_yellow_phase(tl_id):
         if tl_phases[edge_id] == phase_definition:
             traci.trafficlight.setRedYellowGreenState(tl_id, tl_yellow_phases[edge_id])
             break
+
+def set_red_phase(tl_id):
+    traci.trafficlight.setRedYellowGreenState(tl_id, "rrrrrrrrrrrrrrrrrrrrrrrr")
