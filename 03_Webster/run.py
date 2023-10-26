@@ -1,5 +1,4 @@
 import traci
-import time
 from Utils import simulation
 
 index = 0
