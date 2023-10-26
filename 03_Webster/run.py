@@ -1,4 +1,3 @@
-import time
 import traci
 from Utils import simulation
 
@@ -33,6 +32,3 @@ def set_phase(green_time, tl_id, edge_id):
 
 if __name__ == "__main__":
     webster()
-
-    """elif green_time + 2 <= timer < green_time + 5:
-            simulation.set_red_phase(tl_id)"""
