@@ -52,6 +52,8 @@ signal_time_ctrl = ctrl.ControlSystem([rule_a0, rule_b0, rule_c0, rule_d0,
 signal_time_status = ctrl.ControlSystemSimulation(signal_time_ctrl)
 
 def calc_signal_time(edge_id, waiting_vehicles, lanes_on_edge):
+    if waiting_vehicles == 0:
+        return 0
     signal_time_status.input['no_waiting_vehicles'] = waiting_vehicles
     signal_time_status.input['no_lanes_on_edge'] = lanes_on_edge
     signal_time_status.compute()
