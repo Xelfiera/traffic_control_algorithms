@@ -3,7 +3,7 @@ import skfuzzy as fuzzy
 from skfuzzy import control as ctrl
 
 no_waiting_vehicles = ctrl.Antecedent(np.arange(0, 13, 1), 'no_waiting_vehicles')
-no_lanes_on_edge = ctrl.Antecedent(np.arange(0, 5, 0.5), 'no_lanes_on_edges')
+no_lanes_on_edge = ctrl.Antecedent(np.arange(0, 5, 0.5), 'no_lanes_on_edge')
 
 signal_time = ctrl.Consequent(np.arange(0, 51, 1), 'signal_time')
 
@@ -55,7 +55,7 @@ def calc_signal_time(edge_id, waiting_vehicles, lanes_on_edge):
     signal_time_status.input['no_waiting_vehicles'] = waiting_vehicles
     signal_time_status.input['no_lanes_on_edge'] = lanes_on_edge
     signal_time_status.compute()
-    signal_time_output = signal_time_status.output['priority']
+    signal_time_output = signal_time_status.output['signal_time']
 
     print(f"Number of waiting vehicles on {edge_id}: {waiting_vehicles}")
     print(f"Number of lanes on {edge_id}: {lanes_on_edge}")
