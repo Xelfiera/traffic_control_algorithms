@@ -11,7 +11,6 @@ def fuzzyst_logic():
 
     while traci.simulation.getTime() < simulation.simulation_time:
         if simulation.cur_phase_duration <= -3:
-            print(signal_order)
             signal_edge_id = tl_edge_ids[signal_arrangement[signal_order]]
             no_waiting_vehicles = traci.edge.getLastStepHaltingNumber(signal_edge_id)
             no_lanes_on_edge = traci.edge.getLaneNumber(signal_edge_id)
