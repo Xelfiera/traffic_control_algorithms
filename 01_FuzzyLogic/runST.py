@@ -10,7 +10,7 @@ def fuzzyst_logic():
     tl_id = traci.trafficlight.getIDList()[0]
 
     while traci.simulation.getTime() < simulation.simulation_time:
-        if simulation.cur_phase_duration <= -3:
+        if simulation.cur_phase_duration <= -2:
             signal_edge_id = tl_edge_ids[signal_arrangement[signal_order]]
             no_waiting_vehicles = traci.edge.getLastStepHaltingNumber(signal_edge_id)
             no_lanes_on_edge = traci.edge.getLaneNumber(signal_edge_id)
