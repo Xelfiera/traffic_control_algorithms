@@ -12,13 +12,14 @@ tl_yellow_phases = {"1_0": "rrrrrrrrrrrrrrrrrryyyyyy",
                     "4_0": "yyyyyyrrrrrrrrrrrrrrrrrr"}
 
 cur_phase_duration = 0
+sub_range = 20  # calculation range for max_pressure and webster
 
 def start():
     sim_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Intersection")
     sim_file = fr"{sim_path}\kilis.sumocfg"
     traci.start([
         "sumo-gui", "-c", f"{sim_file}", '--start', '--quit-on-end',
-        "--statistic-output", r"statsST\statistics.stats.xml", "--tripinfo-output", r"statsST\tripinfo.trips.xml"
+        "--statistic-output", r"stats\statistics.stats.xml", "--tripinfo-output", r"stats\tripinfo.trips.xml"
     ])
 
 def get_inc_edges():
