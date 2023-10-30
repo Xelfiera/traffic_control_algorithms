@@ -2,12 +2,9 @@ import traci
 import math
 from Utils import simulation
 
-# tmin set to 6 seconds
-
 def max_pressure():
     simulation.start()
     tl_id = traci.trafficlight.getIDList()[0]
-    tmin = 6  # tmin set to 6 seconds
     inc_edges = simulation.get_inc_edges()
     out_edges = simulation.get_out_edges()
 
@@ -25,7 +22,7 @@ def max_pressure():
                     mx_pressure = pressure
 
             simulation.set_green_phase(tl_id, inc_edges[mx_pressure_index])
-            simulation.cur_phase_duration = tmin + 2  # yellow for 2 seconds
+            simulation.cur_phase_duration = simulation.tmin + 2  # yellow for 2 seconds
 
         elif simulation.cur_phase_duration == 2:
             simulation.set_yellow_phase(tl_id)
