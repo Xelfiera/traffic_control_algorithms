@@ -14,6 +14,7 @@ def webster():
     pre_inrange_vehicles = None
     webster_vehicle_count = [0, 0, 0, 0]
     green_times = [0, 0, 0, 0]
+    pre_phase_index = 0
     cur_phase_index = 0
 
     while traci.simulation.getTime() < simulation.simulation_time:
@@ -29,16 +30,19 @@ def webster():
             webster_vehicle_count = [0, 0, 0, 0]
 
         if simulation.cur_phase_duration == 0:
+            pre_phase_index = cur_phase_index
             edge_id = inc_edges[cur_phase_index]
-
             simulation.set_green_phase(tl_id, edge_id)
-            simulation.cur_phase_duration = green_times[cur_phase_index] + 2  # yellow for 2 seconds
+            simulation.cur_phase_duration = green_times[cur_phase_index] + 2
 
-            cur_phase_index += 1
-            if cur_phase_index == 4:
-                cur_phase_index = 0
+            for i in range(4):
+                cur_phase_index += 1
+                if cur_phase_index == 4:
+                    cur_phase_index = 0
+                if len(get_inrange_vehicles(inc_edges)[cur_phase_index]) > 0:
+                    break
 
-        elif simulation.cur_phase_duration == 2:
+        elif simulation.cur_phase_duration == 2 and cur_phase_index != pre_phase_index:
             simulation.set_yellow_phase(tl_id)
 
         pre_inrange_vehicles = inrange_vehicles
