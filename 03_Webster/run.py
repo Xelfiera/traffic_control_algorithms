@@ -1,6 +1,4 @@
 import math
-import time
-
 import traci
 from Utils import simulation
 

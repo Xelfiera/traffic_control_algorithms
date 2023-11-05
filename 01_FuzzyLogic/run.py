@@ -11,7 +11,7 @@ def fuzzy_logic():
         max_priority_edge = inc_edge_ids[get_max_priority_edge(inc_edge_ids)]
         if simulation.cur_phase_duration <= -3:
             simulation.set_green_phase(tl_id, max_priority_edge)
-            simulation.cur_phase_duration = traci.edge.getLastStepHaltingNumber(max_priority_edge) * 3
+            simulation.cur_phase_duration = traci.edge.getLastStepHaltingNumber(max_priority_edge) * 4
         elif simulation.cur_phase_duration == 0:
             simulation.set_yellow_phase(tl_id)
         simulation.cur_phase_duration -= 1
