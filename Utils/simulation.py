@@ -14,6 +14,7 @@ tl_yellow_phases = {"1_0": "rrrrrrrrrrrrrrrrrryyyyyy",
 cur_phase_duration = 0
 sub_range = 20  # calculation range for max_pressure and webster
 tmin = 6  # minimum green time for max_pressure and webster
+phase_status = 'g'  # phase status for max pressure --> 'g'reen or 'y'ellow
 
 def start():
     sim_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Intersection")

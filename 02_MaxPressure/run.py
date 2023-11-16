@@ -1,8 +1,15 @@
+import time
+
 import traci
 import math
 from Utils import simulation
 
+pre_mx_pressure_index = 0
+mx_pressure_index = 0
+
 def max_pressure():
+    global pre_mx_pressure_index
+    global mx_pressure_index
     simulation.start()
     tl_id = traci.trafficlight.getIDList()[0]
     inc_edges = simulation.get_inc_edges()
@@ -10,22 +17,30 @@ def max_pressure():
 
     while traci.simulation.getTime() < simulation.simulation_time:
         if simulation.cur_phase_duration == 0:
-            inc_veh_counts = get_inrange_vehicles(inc_edges)
-            out_veh_counts = get_inrange_vehicles(out_edges)
-            pressures = calc_pressures(inc_veh_counts, out_veh_counts)
+            if simulation.phase_status == 'g':
+                inc_veh_counts = get_inrange_vehicles(inc_edges)
+                out_veh_counts = get_inrange_vehicles(out_edges)
+                pressures = calc_pressures(inc_veh_counts, out_veh_counts)
 
-            mx_pressure_index = 0
-            mx_pressure = pressures[0]
-            for i, pressure in enumerate(pressures):
-                if pressure > mx_pressure:
-                    mx_pressure_index = i
-                    mx_pressure = pressure
+                pre_mx_pressure_index = mx_pressure_index
+                mx_pressure_index = 0
+                mx_pressure = pressures[0]
+                for i, pressure in enumerate(pressures):
+                    if pressure > mx_pressure:
+                        mx_pressure_index = i
+                        mx_pressure = pressure
 
-            simulation.set_green_phase(tl_id, inc_edges[mx_pressure_index])
-            simulation.cur_phase_duration = simulation.tmin + 2  # yellow for 2 seconds
+                if pre_mx_pressure_index != mx_pressure_index:
+                    simulation.set_yellow_phase(tl_id)
+                    simulation.cur_phase_duration = 2
+                    simulation.phase_status = 'y'
+                else:
+                    simulation.cur_phase_duration = simulation.tmin
 
-        elif simulation.cur_phase_duration == 2:
-            simulation.set_yellow_phase(tl_id)
+            elif simulation.phase_status == 'y':
+                simulation.set_green_phase(tl_id, inc_edges[mx_pressure_index])
+                simulation.cur_phase_duration = simulation.tmin
+                simulation.phase_status = 'g'
 
         simulation.cur_phase_duration -= 1
         traci.simulationStep()
